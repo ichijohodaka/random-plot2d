@@ -1,0 +1,116 @@
+/* random-plot2d の見た目。色はすべてここの変数で決まる（--rp2-ramp は点の濃淡）。 */
+.rp2 {
+  --rp2-bg: #f6f7f9;
+  --rp2-panel: #ffffff;
+  --rp2-fg: #1f2328;
+  --rp2-muted: #6b7280;
+  --rp2-line: #d9dde3;
+  --rp2-accent: #2b6cb0;
+  --rp2-plot-bg: #ffffff;
+  --rp2-grid: #eceef1;
+  --rp2-axis: #8a929c;
+  --rp2-err: #c53030;
+  --rp2-ramp: #8fbfe8, #2b6cb0, #1a3a6b, #0b0f1a;
+
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+  background: var(--rp2-bg);
+  color: var(--rp2-fg);
+  font: 13px/1.45 system-ui, -apple-system, "Segoe UI", "Yu Gothic UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  .rp2 {
+    --rp2-bg: #15181d;
+    --rp2-panel: #1c2027;
+    --rp2-fg: #e3e6ea;
+    --rp2-muted: #9aa3ad;
+    --rp2-line: #333a44;
+    --rp2-accent: #63a4ea;
+    --rp2-plot-bg: #0f1216;
+    --rp2-grid: #252a31;
+    --rp2-axis: #6b7480;
+    --rp2-err: #fc8181;
+    --rp2-ramp: #34557f, #4f9be8, #a8d4ff, #ffffff;
+  }
+}
+
+.rp2-panel {
+  background: var(--rp2-panel);
+  border-right: 1px solid var(--rp2-line);
+  overflow-y: auto;
+  padding: 12px 14px 20px;
+  min-height: 0;
+}
+.rp2-panel h1 { font-size: 15px; margin: 0 0 8px; font-weight: 600; }
+.rp2-panel section { margin-top: 14px; }
+.rp2-hd { font-weight: 600; margin-bottom: 4px; }
+.rp2-note { color: var(--rp2-muted); font-size: 12px; margin-bottom: 6px; }
+
+.rp2-var {
+  border: 1px solid var(--rp2-line);
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+  cursor: ns-resize;
+}
+.rp2-var-hd { display: flex; align-items: baseline; gap: 6px; }
+.rp2-name { font-weight: 600; }
+.rp2-unit { color: var(--rp2-muted); }
+.rp2-tag {
+  margin-left: auto; font-size: 11px; padding: 0 6px; border-radius: 8px;
+  border: 1px solid var(--rp2-line); color: var(--rp2-muted);
+}
+.rp2-tag[data-kind="rand"] { color: var(--rp2-accent); border-color: var(--rp2-accent); }
+.rp2-tag[data-kind="link"] { color: var(--rp2-bg); background: var(--rp2-accent); border-color: var(--rp2-accent); }
+.rp2-var-bd { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+.rp2-center { width: 96px; }
+.rp2-width { color: var(--rp2-muted); font-variant-numeric: tabular-nums; }
+.rp2-range { color: var(--rp2-muted); font-size: 11.5px; font-variant-numeric: tabular-nums; min-height: 1em; }
+.rp2-bar { position: relative; height: 6px; margin: 6px 0 2px; border-radius: 3px; background: var(--rp2-line); }
+.rp2-fill { position: absolute; top: 0; bottom: 0; border-radius: 3px; background: var(--rp2-accent); min-width: 0; }
+.rp2-mark { position: absolute; top: -3px; width: 2px; height: 12px; margin-left: -1px; background: var(--rp2-fg); }
+
+.rp2-line { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+.rp2-line > span:first-child { min-width: 64px; }
+.rp2-line input[type="range"] { flex: 1; }
+
+.rp2 input, .rp2 select, .rp2 button { font: inherit; color: inherit; }
+.rp2-num, .rp2-colsel {
+  background: var(--rp2-bg); border: 1px solid var(--rp2-line); border-radius: 4px; padding: 2px 6px;
+}
+.rp2 input.rp2-num[type="number"] { width: 80px; }
+.rp2-btn {
+  background: var(--rp2-bg); border: 1px solid var(--rp2-line); border-radius: 4px;
+  padding: 2px 8px; cursor: pointer;
+}
+.rp2-btn:hover:not(:disabled) { border-color: var(--rp2-accent); }
+.rp2-btn:disabled { opacity: .4; cursor: default; }
+.rp2-zero { font-size: 11px; padding: 0 6px; }
+.rp2 :disabled { cursor: default; }
+
+.rp2-main { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.rp2-axes {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px;
+  padding: 8px 12px; border-bottom: 1px solid var(--rp2-line);
+}
+.rp2-axis { display: flex; align-items: center; gap: 6px; }
+.rp2-axlab { font-weight: 600; }
+.rp2-colsel { max-width: 220px; }
+.rp2-link { display: flex; align-items: center; gap: 3px; color: var(--rp2-muted); }
+.rp2-wrap { position: relative; flex: 1; min-height: 240px; }
+.rp2-canvas { position: absolute; inset: 0; display: block; touch-action: none; }
+.rp2-status {
+  padding: 4px 12px; border-top: 1px solid var(--rp2-line); color: var(--rp2-muted);
+  font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.rp2-status.rp2-err { color: var(--rp2-err); white-space: normal; }
+
+@media (max-width: 760px) {
+  /* 縦に積むと高さが足りないことがあるので、中身に合わせて伸ばす。
+     置き場所の要素に height: 100% が付いていても勝つよう !important にする */
+  .rp2 { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); height: auto !important; min-height: 100%; }
+  .rp2-panel { max-height: 42vh; border-right: 0; border-bottom: 1px solid var(--rp2-line); }
+  .rp2-wrap { min-height: 300px; }
+}
